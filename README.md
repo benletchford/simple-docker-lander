@@ -19,7 +19,7 @@ services:
     image: benletchford/simple-docker-lander:latest
     restart: always
     ports:
-      - 81:80
+      - 80:80
     environment:
       CONFIG: |
         site-name: my-awesome-site
