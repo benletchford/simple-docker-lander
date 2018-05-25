@@ -10,16 +10,16 @@ Very simple one file, 53 lines of Python.
 
 ## Usage
 
-Designed to fit elegantly into a `docker-compose` file:
+Designed to fit elegantly into a `docker-compose.yml` file:
 
 ```
 version: '3.1'
 services:
   simple-docker-lander:
-    benletchford/simple-docker-lander:latest
+    image: benletchford/simple-docker-lander:latest
     restart: always
     ports:
-      - 80:80
+      - 81:80
     environment:
       CONFIG: |
         site-name: my-awesome-site
