@@ -39,9 +39,6 @@ if __name__ == '__main__':
         else:
             groups[0]['links'].append(link)
 
-    print (groups)
-    print (groups_index_map)
-
     @route('/')
     def index():
         return template('''<!DOCTYPE html>
