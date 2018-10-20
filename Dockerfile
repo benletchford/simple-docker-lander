@@ -1,10 +1,15 @@
-FROM python:2
+FROM python:3.6
 
 WORKDIR /usr/src/app
 
 COPY simple-docker-lander.py simple-docker-lander.py
-COPY requirements.txt requirements.txt
+COPY Pipfile Pipfile
+COPY Pipfile.lock Pipfile.lock
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install pipenv
+RUN pipenv install
 
-CMD [ "python", "./simple-docker-lander.py" ]
+ENV PIPENV_DONT_LOAD_ENV=1
+ENV PYTHONUNBUFFERED=1
+
+ENTRYPOINT pipenv run python simple-docker-lander.py
