@@ -16,7 +16,6 @@ It's plain and simple.
 
 ![simple-docker-lamder](simple-docker-lander.png)
 
-
 ## Usage
 
 Example `docker-compose.yml` file:
@@ -28,8 +27,10 @@ services:
     image: benletchford/simple-docker-lander:latest
     restart: always
     ports:
-      - 80:80
+      - 80:80  # or 443:80 if you want to use SSL
     environment:
+      SSL_CERTFILE: /etc/letsencrypt/live/example.com/fullchain.pem  # optional
+      SSL_KEYFILE: /etc/letsencrypt/live/example.com/privkey.pem  # optional
       CONFIG: |
         site-name: my-awesome-site
         link-mode: tab
@@ -61,7 +62,14 @@ As you can see, just populate the `CONFIG` environment variable with a `YAML` st
 ## Docker Build
 
 Build and run the docker image.
+
 ```
 $ docker build -t simple-docker-lander .
 $ docker run -it --rm -p 80:80 --name simple-docker-lander simple-docker-lander
+```
+
+Push the docker image to Docker Hub.
+
+```
+$ docker buildx build --push --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --tag benletchford/simple-docker-lander:latest .
 ```
