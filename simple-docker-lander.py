@@ -85,8 +85,17 @@ if __name__ == '__main__':
     </body>
 </html>''', config=config, groups=groups)
 
-    run(
-        server='paste',
-        host='0.0.0.0',
-        port='80'
-    )
+    kwargs = {
+        'server': 'gunicorn',
+        'host': '0.0.0.0',
+        'port': '80',
+        'workers': 10,
+    }
+    if 'SSL_KEYFILE' in os.environ:
+        kwargs['keyfile'] = os.environ['SSL_KEYFILE']
+    if 'SSL_CERTFILE' in os.environ:
+        kwargs['certfile'] = os.environ['SSL_CERTFILE']
+    if 'WORKERS' in os.environ:
+        kwargs['workers'] = int(os.environ['WORKERS'])
+
+    run(**kwargs)

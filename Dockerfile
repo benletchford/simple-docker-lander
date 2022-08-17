@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.10
 
 WORKDIR /usr/src/app
 
@@ -7,9 +7,6 @@ COPY Pipfile Pipfile
 COPY Pipfile.lock Pipfile.lock
 
 RUN pip install pipenv
-RUN pipenv install
+RUN pipenv install --system
 
-ENV PIPENV_DONT_LOAD_ENV=1
-ENV PYTHONUNBUFFERED=1
-
-ENTRYPOINT pipenv run python simple-docker-lander.py
+ENTRYPOINT python simple-docker-lander.py
