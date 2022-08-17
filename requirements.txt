@@ -1,3 +1,0 @@
-bottle==0.12.13
-PyYAML==3.12
-Paste==2.0.3
